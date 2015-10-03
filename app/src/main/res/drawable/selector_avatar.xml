@@ -18,5 +18,5 @@
     android:shape="oval">
     <stroke
         android:width="4dp"
-        android:color="#e91e63" />
+        android:color="#fFFF" />
 </shape>

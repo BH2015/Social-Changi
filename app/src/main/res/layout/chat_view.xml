@@ -48,7 +48,7 @@
                 android:maxLines="4"
                 android:singleLine="false"
                 android:inputType="textCapSentences"
-
+                android:textColor="@color/text_dark"
                 android:textSize="18sp"
                 android:paddingLeft="4dp" />
 

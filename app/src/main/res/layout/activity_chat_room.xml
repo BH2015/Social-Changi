@@ -11,7 +11,8 @@
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_above="@+id/categories_bar"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:layout="@layout/chat_view" />
 
     <include
         android:id="@+id/categories_bar"
