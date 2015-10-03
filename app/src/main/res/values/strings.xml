@@ -7,4 +7,27 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string name="last_initial">Last Initial</string>
+    <string name="display_name">Enter A Display Name</string>
+    <string name="sign_in">Sign In</string>
+    <string name="choose_avatar">Choose an Avatar</string>
+    <string name="an_avatar">An Avatar</string>
+    <string name="player_display_name">%1$s %2$s</string>
+    <string name="btn_true">True</string>
+    <string name="btn_false">False</string>
+    <string name="category">Category</string>
+    <string name="up">up</string>
+    <string name="x_points">%1$d pts</string>
+
+
+    <string name="path_tick_line_1">M19.6,7 L10.4,16.2</string>
+    <string name="path_tick_line_2">M4.8,13.4 L9,17.6</string>
+    <string name="path_cross_line_1">M17.6,6.4 L6.4,17.6</string>
+    <string name="path_cross_line_2">M6.4,6.4 L17.6,17.6</string>
+
+    <!-- names -->
+    <string name="groupTickCross">groupTickCross</string>
+    <string name="line_1">line_1</string>
+    <string name="line_2">line_2</string>
 </resources>

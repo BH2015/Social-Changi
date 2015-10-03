@@ -24,6 +24,11 @@ public class PreferenceHelper {
         editor.apply();
     }
 
+    public static void clearPerson(Context context) {
+            SharedPreferences.Editor editor = getEditor(context);
+        editor.clear();
+        editor.apply();
+    }
     public static Person getPerson(Context context) {
         SharedPreferences preferences = getSharedPreferences(context);
         final String firstName = preferences.getString(PREFERENCE_PERSON_DISPLAY_NAME, null);
