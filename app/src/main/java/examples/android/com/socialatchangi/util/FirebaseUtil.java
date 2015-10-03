@@ -14,7 +14,17 @@ public final class FirebaseUtil {
     private static final Firebase FIREBASE_REF = new Firebase(SHINE_OUR_APP_FIREBASE);
 
     public enum FirebaseDataTree {
-        GAMES_CATEGORY;
+        GAMES_CATEGORY("game");
+
+        private String subCategory;
+
+        private FirebaseDataTree(String subCategory) {
+            this.subCategory = subCategory;
+        }
+
+        public String getSubCategory(){
+            return this.subCategory;
+        }
     };
 
     private FirebaseUtil() {
@@ -25,8 +35,8 @@ public final class FirebaseUtil {
         FIREBASE_REF.child(treename.name()).addValueEventListener(valueEventListener);
     }
 
-    public static void writeDataToChild(FirebaseDataTree treename,String value) {
-        FIREBASE_REF.child(treename.name()).setValue(value);
+    public static void writeDataToChild(FirebaseDataTree treename,Object value) {
+        FIREBASE_REF.child(treename.name()).child(treename.getSubCategory()).setValue(value);
     }
 
 

@@ -4,10 +4,21 @@
     android:layout_height="@dimen/chat_view_broadcast_receiver_height"
     android:background="@color/pink"
     tools:context="examples.android.com.socialatchangi.ChatViewBroadCastReceiverFragment">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:id="@+id/chat_notice"
-        android:text="@string/notifcation_messages" />
+        <ImageView
+            android:id="@+id/sticker_id"
+            android:layout_weight="1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/text_light"/>
 
+        <TextView android:layout_width="match_parent" android:layout_height="match_parent"
+            android:id="@+id/chat_notice"
+            android:text="@string/notifcation_messages"
+            android:layout_weight="1"/>
+    </LinearLayout>
 </FrameLayout>
