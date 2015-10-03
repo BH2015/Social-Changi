@@ -1,6 +1,15 @@
 <resources>
 
-    <color name="black_overlay">#66000000</color>
+    <color name="textColorPrimary">#FFFFFF</color>
+
+    <!-- 300 -->
+    <color name="colorPrimary">#BA68C8</color>
+    <!-- 500 -->
+    <color name="colorPrimaryDark">#9C27B0</color>
+    <!-- 100
+     <color name="windowBackground">#E1BEE7</color>
+    -->
+    <color name="windowBackground">#FFFFFF</color>
 
     <color name="touch_effect">#9ccc</color>
 

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@color/colorPrimary">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/ic_movie_white_24dp"
+            android:paddingTop="2pt"
+            android:text="Movies"
+            android:textAllCaps="false"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="10sp" />
+
+        <Button
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/ic_gamepad_white_24dp"
+            android:paddingTop="2pt"
+            android:text="Games"
+            android:textAllCaps="false"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="10sp" />
+
+        <Button
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/ic_local_florist_white_24dp"
+            android:paddingTop="2pt"
+            android:text="Gardens"
+            android:textAllCaps="false"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="10sp" />
+
+        <Button
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/ic_shopping_basket_white_24dp"
+            android:paddingTop="2pt"
+            android:text="Shops"
+            android:textAllCaps="false"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+</android.support.v7.widget.Toolbar>
