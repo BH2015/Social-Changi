@@ -61,7 +61,7 @@ public class ChatFragment extends Fragment implements SizeNotifierRelativeLayout
     private Firebase mFirebaseRef;
     private Person mPerson;
     private ValueEventListener mConnectedListener;
-
+    private String category;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,7 +75,9 @@ public class ChatFragment extends Fragment implements SizeNotifierRelativeLayout
         //setupUsername();
         this.mPerson = PreferenceHelper.getPerson(getContext());
 
-        mFirebaseRef = FirebaseUtil.getFirebaseRef().child("chat");
+        this.category = this.getArguments().getString("category");
+
+        mFirebaseRef = FirebaseUtil.getFirebaseRef().child(this.category);
 
         View view = inflater.inflate(R.layout.chat_view, container, false);
 

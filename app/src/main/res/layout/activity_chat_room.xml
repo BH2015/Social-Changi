@@ -6,16 +6,16 @@
     android:orientation="vertical"
     tools:context="examples.android.com.socialatchangi.ChatRoomActivity">
 
-    <fragment android:name="examples.android.com.socialatchangi.ChatFragment"
-        android:id="@+id/chat_fragment"
-        android:layout_weight="1"
+    <FrameLayout android:name="examples.android.com.socialatchangi.ChatFragment"
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_above="@+id/categories_bar"
         android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_above="@+id/categories_bar"
         tools:layout="@layout/chat_view" />
 
     <include
-        android:id="@+id/categories_bar"
+        android:id="@id/categories_bar"
         layout="@layout/categories_bar" />
 
 </LinearLayout>
