@@ -101,6 +101,10 @@ public class SignInFragment extends Fragment {
             //CategorySelectionActivity.start(activity, mPlayer);
             activity.finish();
         }
+        if (mPerson != null && mFirstName != null && mFirstName.getText() != null
+                && !mFirstName.getText().toString().isEmpty()) {
+            mDoneFab.setVisibility(View.VISIBLE);
+        }
 
         super.onViewCreated(view, savedInstanceState);
     }
@@ -151,7 +155,6 @@ public class SignInFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() == 0) {
                     mDoneFab.setVisibility(View.GONE);
-                    PreferenceHelper.clearPerson(SignInFragment.this.getActivity());
                 } else {
                     mDoneFab.setVisibility(View.VISIBLE);
                 }
