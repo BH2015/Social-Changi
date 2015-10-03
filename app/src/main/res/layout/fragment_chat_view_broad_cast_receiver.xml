@@ -14,11 +14,35 @@
             android:layout_weight="1"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="@color/text_light"/>
+            android:tintMode="src_atop"
+            android:background="@color/text_dark"/>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:layout_weight="0.5">
 
-        <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-            android:id="@+id/chat_notice"
-            android:text="@string/notifcation_messages"
-            android:layout_weight="1"/>
+            <TextView android:layout_width="match_parent" android:layout_height="match_parent"
+                android:id="@+id/game_name"
+                android:text="God of War"
+                android:layout_weight="1"
+                style="@style/SAC.TextAppearance.Title"/>
+            <TextView android:layout_width="match_parent" android:layout_height="match_parent"
+                android:id="@+id/arena"
+                android:text="MultiUser"
+                android:layout_weight="1"
+                style="@style/SAC.TextAppearance.Title"/>
+            <TextView android:layout_width="match_parent" android:layout_height="match_parent"
+                android:id="@+id/startTime"
+                android:text="10:00 AM, SGT"
+                android:layout_weight="1"
+                style="@style/SAC.TextAppearance.Title"/>
+            <TextView android:layout_width="match_parent" android:layout_height="match_parent"
+                android:id="@+id/arena_location"
+                android:text="T2 Transit,Playzone,L3"
+                android:layout_weight="1"
+                style="@style/SAC.TextAppearance.Title"/>
+
+        </LinearLayout>
     </LinearLayout>
 </FrameLayout>

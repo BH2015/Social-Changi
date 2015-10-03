@@ -12,6 +12,15 @@ public class GameCategory {
     private String game_name;
     private String meetupTime;
     private String arena;
+    private String location;
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     public String getArena() {
         return arena;

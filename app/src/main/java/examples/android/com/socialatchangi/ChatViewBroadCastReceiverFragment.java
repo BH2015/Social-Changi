@@ -25,7 +25,10 @@ import examples.android.com.socialatchangi.util.FirebaseUtil;
 
 public class ChatViewBroadCastReceiverFragment extends Fragment {
     private static final String TAG = ChatViewBroadCastReceiverFragment.class.getName();
-    private TextView mTextView;
+    private TextView mGameName;
+    private TextView mArena;
+    private TextView mStartTimr;
+    private TextView mLoc;
     private ImageView mImg;
 
     public ChatViewBroadCastReceiverFragment() {
@@ -44,7 +47,11 @@ public class ChatViewBroadCastReceiverFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_chat_view_broad_cast_receiver, container,
                 false);
 
-        mTextView = (TextView)view.findViewById(R.id.chat_notice);
+        mGameName = (TextView)view.findViewById(R.id.game_name);
+        mArena = (TextView)view.findViewById(R.id.arena);
+        mStartTimr = (TextView)view.findViewById(R.id.startTime);
+        mLoc = (TextView)view.findViewById(R.id.arena_location);
+
         mImg = (ImageView)view.findViewById(R.id.sticker_id);
         FirebaseUtil.addValueEventListener(FirebaseUtil.FirebaseDataTree.GAMES_CATEGORY,
                 new ValueEventListener() {
@@ -63,10 +70,17 @@ public class ChatViewBroadCastReceiverFragment extends Fragment {
                                 .GAMES_CATEGORY.getSubCategory()).get("arena");
                         String gameStickerId = categoryMap.get(FirebaseUtil.FirebaseDataTree
                                 .GAMES_CATEGORY.getSubCategory()).get("gameStickerId");
+                        String loc = categoryMap.get(FirebaseUtil.FirebaseDataTree
+                                .GAMES_CATEGORY.getSubCategory()).get("location");
 
-                        int resId = ChatViewBroadCastReceiverFragment.this.getResources().getIdentifier(gameStickerId,"drawable",
-                                ChatViewBroadCastReceiverFragment.this.getActivity().getApplicationContext().getPackageName());
-                        Log.d(TAG, String.valueOf(resId));
+                        int resId = ChatViewBroadCastReceiverFragment.this.getResources()
+                                .getIdentifier(gameStickerId, "drawable",
+                                        ChatViewBroadCastReceiverFragment.this.getActivity()
+                                                .getApplicationContext().getPackageName());
+                        mGameName.setText(game_name);
+                        mArena.setText(arena);
+                        mStartTimr.setText(meetupTime);
+                        mLoc.setText(loc);
                         mImg.setImageResource(resId);
                     }
 
@@ -81,9 +95,10 @@ public class ChatViewBroadCastReceiverFragment extends Fragment {
 
     public GameCategory getRandomGameMessage() {
         GameCategory game = new GameCategory();
-        game.setGame_id(String.valueOf((int)Math.round(Math.random()*5)));
-        game.setGame_name("NAME_" + game.getGame_id());
-        game.setArena("ARENA_" + game.getGame_id());
+        game.setGame_id(String.valueOf((int) Math.round(Math.random() * 5)));
+        game.setGame_name("GOD OF WAR" + game.getGame_id());
+        game.setArena("MULTIUSER");
+        game.setLocation("T2, GamingZone, L2");
         Date date = new Date();
         game.setMeetupTime(date.toString());
         return game;
