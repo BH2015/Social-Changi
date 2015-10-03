@@ -4,46 +4,22 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ChatViewBroadCastReceiverFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ChatViewBroadCastReceiverFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import examples.android.com.socialatchangi.util.FirebaseUtil;
+
 public class ChatViewBroadCastReceiverFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ChatViewBroadCastReceiverFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ChatViewBroadCastReceiverFragment newInstance(String param1, String param2) {
-        ChatViewBroadCastReceiverFragment fragment = new ChatViewBroadCastReceiverFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private static final String TAG = ChatViewBroadCastReceiverFragment.class.getName();
+    private TextView mTextView;
 
     public ChatViewBroadCastReceiverFragment() {
         // Required empty public constructor
@@ -52,27 +28,32 @@ public class ChatViewBroadCastReceiverFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        FirebaseUtil.writeDataToChild(FirebaseUtil.FirebaseDataTree.GAMES_CATEGORY,
+                "HELLO HOW DO U DO");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat_view_broad_cast_receiver, container, false);
+        View view = inflater.inflate(R.layout.fragment_chat_view_broad_cast_receiver, container,
+                false);
+
+        mTextView = (TextView)view.findViewById(R.id.chat_notice);
+        FirebaseUtil.addValueEventListener(FirebaseUtil.FirebaseDataTree.GAMES_CATEGORY,
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        ChatViewBroadCastReceiverFragment.this.mTextView.setText(
+                                (String)dataSnapshot.getValue());
+                    }
+
+                    @Override
+                    public void onCancelled(FirebaseError firebaseError) {
+                        Log.e(TAG,firebaseError.getDetails());
+                    }
+                });
+        FirebaseUtil.writeDataToChild(FirebaseUtil.FirebaseDataTree.GAMES_CATEGORY, "WOWO");
+        return view;
     }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
-
 }
