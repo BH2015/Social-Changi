@@ -2,14 +2,13 @@ package examples.android.com.socialatchangi;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +35,7 @@ import examples.android.com.socialatchangi.widget.DoneFab;
 public class SignInFragment extends Fragment {
 
 
+    private static final String EXTRA_PERSON = "person";
     private OnFragmentInteractionListener mListener;
     private GridView mAvatarGrid;
     private View mSelectedAvatarView;
@@ -149,13 +149,11 @@ public class SignInFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Log.d("SignInFragment","changing fab status");
                 if (s.length() == 0) {
                     mDoneFab.setVisibility(View.GONE);
-                    Log.d("SignInFragment", "changing fab status1");
+                    PreferenceHelper.clearPerson(SignInFragment.this.getActivity());
                 } else {
                     mDoneFab.setVisibility(View.VISIBLE);
-                    Log.d("SignInFragment", "changing fab status2");
                 }
             }
 
@@ -179,10 +177,10 @@ public class SignInFragment extends Fragment {
                             @Override
                             public void run() {
                                 if (null == mSelectedAvatarView) {
-//                                    performSignInWithTransition(mAvatarGrid.getChildAt(
-//                                            mSelectedAvatar.ordinal()));
+                                    performSignInWithTransition(mAvatarGrid.getChildAt(
+                                            mSelectedAvatar.ordinal()));
                                 } else {
-//                                    performSignInWithTransition(mSelectedAvatarView);
+                                    performSignInWithTransition(mSelectedAvatarView);
                                 }
                             }
                         });
@@ -203,11 +201,15 @@ public class SignInFragment extends Fragment {
 
     private void performSignInWithTransition(View v) {
         final Activity activity = getActivity();
-
-        final Pair[] pairs = new Pair[]{
-                new Pair<>(v, activity.getString(R.string.transition_avatar))};
-        ActivityOptions activityOptions = ActivityOptions
-                .makeSceneTransitionAnimation(activity, pairs);
+//
+//        final Pair[] pairs = new Pair[]{
+//                new Pair<>(v, activity.getString(R.string.transition_avatar))};
+//        ActivityOptions activityOptions = ActivityOptions
+//                .makeSceneTransitionAnimation(activity, pairs);
+        Intent starter = new Intent(activity, ChatRoomActivity.class);
+        starter.putExtra(EXTRA_PERSON, mPerson);
+//        activity.startActivity(starter, activityOptions.toBundle());
+        activity.startActivity(starter);
         //CategorySelectionActivity.start(activity, mPerson, activityOptions);
     }
 
