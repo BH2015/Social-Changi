@@ -37,6 +37,7 @@ import examples.android.com.socialatchangi.helper.PreferenceHelper;
 import examples.android.com.socialatchangi.model.ChatMessage;
 import examples.android.com.socialatchangi.model.Person;
 import examples.android.com.socialatchangi.model.Status;
+import examples.android.com.socialatchangi.util.FirebaseUtil;
 import examples.android.com.socialatchangi.widget.Emoji;
 import examples.android.com.socialatchangi.widget.EmojiView;
 import examples.android.com.socialatchangi.widget.SizeNotifierRelativeLayout;
@@ -60,7 +61,6 @@ public class ChatFragment extends Fragment implements SizeNotifierRelativeLayout
     private Firebase mFirebaseRef;
     private Person mPerson;
     private ValueEventListener mConnectedListener;
-    private static final String FIREBASE_URL = "https://shining-fire-1921.firebaseio.com";
 
 
     @Override
@@ -75,7 +75,7 @@ public class ChatFragment extends Fragment implements SizeNotifierRelativeLayout
         //setupUsername();
         this.mPerson = PreferenceHelper.getPerson(getContext());
 
-        mFirebaseRef = new Firebase(FIREBASE_URL).child("chat");
+        mFirebaseRef = FirebaseUtil.getFirebaseRef().child("chat");
 
         View view = inflater.inflate(R.layout.chat_view, container, false);
 
@@ -104,7 +104,7 @@ public class ChatFragment extends Fragment implements SizeNotifierRelativeLayout
             }
         });
 
-        listAdapter = new ChatListAdapter(mFirebaseRef.limit(5), getContext(), mPerson);
+        listAdapter = new ChatListAdapter(mFirebaseRef.limit(10), getContext(), mPerson);
 
         chatListView.setAdapter(listAdapter);
 

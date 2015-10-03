@@ -39,5 +39,7 @@ public final class FirebaseUtil {
         FIREBASE_REF.child(treename.name()).child(treename.getSubCategory()).setValue(value);
     }
 
-
+    public static Firebase getFirebaseRef() {
+        return FIREBASE_REF;
+    }
 }
