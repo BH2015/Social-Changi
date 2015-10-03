@@ -9,57 +9,61 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
+        <Button android:id="@+id/category_movies"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:drawableTop="@drawable/ic_movie_white_24dp"
+            android:drawableTop="@drawable/button_movies_selector"
             android:paddingTop="2pt"
-            android:text="Movies"
+            android:text="@string/category_label_movies"
             android:textAllCaps="false"
-            android:textColor="@color/textColorPrimary"
-            android:textSize="10sp" />
+            android:textColor="@drawable/button_text_selector"
+            android:textSize="12sp"
+            android:onClick="onSwitchCategory" />
 
-        <Button
+        <Button android:id="@+id/category_games"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:drawableTop="@drawable/ic_gamepad_white_24dp"
+            android:drawableTop="@drawable/button_games_selector"
             android:paddingTop="2pt"
-            android:text="Games"
+            android:text="@string/category_label_games"
             android:textAllCaps="false"
-            android:textColor="@color/textColorPrimary"
-            android:textSize="10sp" />
+            android:textColor="@drawable/button_text_selector"
+            android:textSize="12sp"
+            android:onClick="onSwitchCategory" />
 
-        <Button
+        <Button android:id="@+id/category_gardens"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:drawableTop="@drawable/ic_local_florist_white_24dp"
+            android:drawableTop="@drawable/button_gardens_selector"
             android:paddingTop="2pt"
-            android:text="Gardens"
+            android:text="@string/category_label_gardens"
             android:textAllCaps="false"
-            android:textColor="@color/textColorPrimary"
-            android:textSize="10sp" />
+            android:textColor="@drawable/button_text_selector"
+            android:textSize="12sp"
+            android:onClick="onSwitchCategory" />
 
-        <Button
+        <Button android:id="@+id/category_shops"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:drawableTop="@drawable/ic_shopping_basket_white_24dp"
+            android:drawableTop="@drawable/button_shops_selector"
             android:paddingTop="2pt"
-            android:text="Shops"
+            android:text="@string/category_label_shops"
             android:textAllCaps="false"
-            android:textColor="@color/textColorPrimary"
-            android:textSize="10sp" />
+            android:textColor="@drawable/button_text_selector"
+            android:textSize="12sp"
+            android:onClick="onSwitchCategory" />
 
     </LinearLayout>
 

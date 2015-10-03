@@ -3,12 +3,11 @@ package examples.android.com.socialatchangi.adapter;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.client.Query;
+import com.pkmmte.view.CircularImageView;
 
 import java.text.SimpleDateFormat;
 
@@ -50,6 +49,7 @@ public class ChatListAdapter extends FirebaseListAdapter<ChatMessage> {
                 holder1.messageTextView = (TextView) v.findViewById(R.id.message_text);
                 holder1.timeTextView = (TextView) v.findViewById(R.id.time_text);
                 holder1.replyAuthor = (TextView) v.findViewById(R.id.chat_company_reply_author);
+                holder1.replyAvatar = (CircularImageView) v.findViewById(R.id.reply_author_avatar);
 
                 v.setTag(holder1);
             } else {
@@ -61,6 +61,7 @@ public class ChatListAdapter extends FirebaseListAdapter<ChatMessage> {
             holder1.messageTextView.setText(Emoji.replaceEmoji(message.getMessageText(), holder1.messageTextView.getPaint().getFontMetricsInt(), AndroidUtilities.dp(16)));
             holder1.timeTextView.setText(SIMPLE_DATE_FORMAT.format(message.getMessageTime()));
             holder1.replyAuthor.setText(message.getAuthor());
+            holder1.replyAvatar.setImageDrawable(context.getResources().getDrawable(message.getAvatar().getDrawableId()));
 
         } else {
 
@@ -114,6 +115,7 @@ public class ChatListAdapter extends FirebaseListAdapter<ChatMessage> {
         public TextView messageTextView;
         public TextView timeTextView;
         public TextView replyAuthor;
+        public CircularImageView replyAvatar;
 
 
     }
