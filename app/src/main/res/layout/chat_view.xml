@@ -23,7 +23,9 @@
         android:scrollbarStyle="outsideOverlay"
         android:layout_above="@+id/bottomlayout"
         android:layout_below="@+id/chat_view_broacast_fragment"
-        android:layout_height="match_parent"></ListView>
+        android:layout_height="match_parent"
+        android:transcriptMode="alwaysScroll"
+        android:stackFromBottom="true"></ListView>
 
     <LinearLayout
         android:id="@+id/bottomlayout"

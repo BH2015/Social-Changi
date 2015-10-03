@@ -20,8 +20,8 @@
         android:layout_height="@dimen/size_avatar_toolbar"
         android:src="@drawable/ic_single_tick"
         app:border="true"
-        app:border_color="#EEEEEE"
-        app:border_width="4dp"
+        app:border_color="#FFFF"
+        app:border_width="3dp"
         app:shadow="true" />
 
 
