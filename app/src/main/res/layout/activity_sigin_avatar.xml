@@ -10,6 +10,6 @@
         android:layout_height="fill_parent"
         android:src="@drawable/splash"
         android:layout_gravity="center"
-        android:scaleType="centerCrop"/>
+        android:scaleType="matrix"/>
 
 </FrameLayout>
