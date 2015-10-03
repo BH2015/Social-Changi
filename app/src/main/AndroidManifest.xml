@@ -21,7 +21,7 @@
             android:name=".SignInAvatar"
             android:label="Welcome To Changi Airport"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/AppTheme">
+            android:theme="@style/SAC.Purple">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

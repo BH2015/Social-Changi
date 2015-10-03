@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
 
 import examples.android.com.socialatchangi.adapter.AvatarAdapter;
 import examples.android.com.socialatchangi.helper.PreferenceHelper;
@@ -83,6 +84,11 @@ public class SignInFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        ImageView img = (ImageView)getActivity().findViewById(R.id.splashscreen);
+        if (img != null) {
+            img.setVisibility(View.GONE);
+        }
+
         assurePlayerInit();
 
         if (null == mPerson) {
@@ -95,6 +101,7 @@ public class SignInFragment extends Fragment {
             //CategorySelectionActivity.start(activity, mPlayer);
             activity.finish();
         }
+
         super.onViewCreated(view, savedInstanceState);
     }
 
