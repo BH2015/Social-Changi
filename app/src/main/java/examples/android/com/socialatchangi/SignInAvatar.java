@@ -10,12 +10,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.firebase.client.Firebase;
+
 public class SignInAvatar extends Activity
         implements SignInFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_sigin_avatar);
         new Handler().postDelayed(new Runnable() {
             @Override
