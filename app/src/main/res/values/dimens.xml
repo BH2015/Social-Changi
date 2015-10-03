@@ -20,5 +20,6 @@
     <dimen name="stroke_width_avatar">4dp</dimen>
 
     <dimen name="size_edit_text">18sp</dimen>
+    <dimen name="chat_view_broadcast_receiver_height">100dp</dimen>
 
 </resources>

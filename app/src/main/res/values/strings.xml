@@ -34,4 +34,7 @@
     <string name="title_activity_chat_room">ChatRoomActivity</string>
     <string name="type_your_message">Enter msg</string>
     <string name="NoRecent">No recent</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="notifcation_messages">Push Notifcations Area</string>
 </resources>

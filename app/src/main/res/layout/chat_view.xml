@@ -1,11 +1,18 @@
+
 <examples.android.com.socialatchangi.widget.SizeNotifierRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/chat_layout"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/background">
 
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:id="@+id/chat_view_broacast_fragment"
+        android:name="examples.android.com.socialatchangi.ChatViewBroadCastReceiverFragment"
+        tools:layout="@layout/fragment_chat_view_broad_cast_receiver"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/chat_view_broadcast_receiver_height"
+         />
 
     <ListView
         android:id="@+id/chat_list_view"
@@ -15,6 +22,7 @@
         android:layout_width="match_parent"
         android:scrollbarStyle="outsideOverlay"
         android:layout_above="@+id/bottomlayout"
+        android:layout_below="@+id/chat_view_broacast_fragment"
         android:layout_height="match_parent"></ListView>
 
     <LinearLayout
