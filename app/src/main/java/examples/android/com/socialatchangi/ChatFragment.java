@@ -80,7 +80,6 @@ public class ChatFragment extends Fragment implements SizeNotifierRelativeLayout
             }
         });
 
-        System.out.println(">>>>>n create is called >>>>>>> Chat fragment");
         emojiButton = (ImageView) view.findViewById(R.id.emojiButton);
 
         emojiButton.setOnClickListener(new View.OnClickListener() {
