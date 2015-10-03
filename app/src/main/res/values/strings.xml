@@ -32,4 +32,6 @@
     <string name="line_2">line_2</string>
 
     <string name="title_activity_chat_room">ChatRoomActivity</string>
+    <string name="type_your_message">Enter msg</string>
+    <string name="NoRecent">No recent</string>
 </resources>
