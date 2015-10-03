@@ -72,11 +72,16 @@ public class ChatViewBroadCastReceiverFragment extends Fragment {
                                 .GAMES_CATEGORY.getSubCategory()).get("gameStickerId");
                         String loc = categoryMap.get(FirebaseUtil.FirebaseDataTree
                                 .GAMES_CATEGORY.getSubCategory()).get("location");
+                        int resId = R.drawable.gamers_sticker1;
+                        try {
+                          resId = ChatViewBroadCastReceiverFragment.this.getResources()
+                                  .getIdentifier(gameStickerId, "drawable",
+                                          ChatViewBroadCastReceiverFragment.this.getActivity()
+                                                  .getApplicationContext().getPackageName());
+                        } catch (Exception e) {
+                            resId = R.drawable.gamers_sticker10;
+                        }
 
-                        int resId = ChatViewBroadCastReceiverFragment.this.getResources()
-                                .getIdentifier(gameStickerId, "drawable",
-                                        ChatViewBroadCastReceiverFragment.this.getActivity()
-                                                .getApplicationContext().getPackageName());
                         mGameName.setText(game_name);
                         mArena.setText(arena);
                         mStartTimr.setText(meetupTime);
@@ -95,7 +100,7 @@ public class ChatViewBroadCastReceiverFragment extends Fragment {
 
     public GameCategory getRandomGameMessage() {
         GameCategory game = new GameCategory();
-        game.setGame_id(String.valueOf((int) Math.round(Math.random() * 5)));
+        game.setGame_id(String.valueOf((int) Math.round(Math.random() * 10)));
         game.setGame_name("GOD OF WAR" + game.getGame_id());
         game.setArena("MULTIUSER");
         game.setLocation("T2, GamingZone, L2");
