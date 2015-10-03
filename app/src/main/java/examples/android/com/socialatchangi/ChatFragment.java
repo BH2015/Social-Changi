@@ -19,6 +19,12 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,9 +32,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import examples.android.com.socialatchangi.adapter.ChatListAdapter;
+import examples.android.com.socialatchangi.helper.PreferenceHelper;
 import examples.android.com.socialatchangi.model.ChatMessage;
+import examples.android.com.socialatchangi.model.Person;
 import examples.android.com.socialatchangi.model.Status;
-import examples.android.com.socialatchangi.model.UserType;
 import examples.android.com.socialatchangi.widget.Emoji;
 import examples.android.com.socialatchangi.widget.EmojiView;
 import examples.android.com.socialatchangi.widget.SizeNotifierRelativeLayout;
@@ -41,7 +49,6 @@ public class ChatFragment extends Fragment implements SizeNotifierRelativeLayout
 
     private ListView chatListView;
     private EditText chatEditText1;
-    private ArrayList<ChatMessage> chatMessages;
     private ImageView enterChatView1, emojiButton;
     private ChatListAdapter listAdapter;
     private EmojiView emojiView;
@@ -50,6 +57,10 @@ public class ChatFragment extends Fragment implements SizeNotifierRelativeLayout
     private int keyboardHeight;
     private boolean keyboardVisible;
     private WindowManager.LayoutParams windowLayoutParams;
+    private Firebase mFirebaseRef;
+    private Person mPerson;
+    private ValueEventListener mConnectedListener;
+    private static final String FIREBASE_URL = "https://shining-fire-1921.firebaseio.com";
 
 
     @Override
@@ -60,11 +71,15 @@ public class ChatFragment extends Fragment implements SizeNotifierRelativeLayout
         // the previous article selection set by onSaveInstanceState().
         // This is primarily necessary when in the two-pane layout.
 
+        // Make sure we have a mUsername
+        //setupUsername();
+        this.mPerson = PreferenceHelper.getPerson(getContext());
+
+        mFirebaseRef = new Firebase(FIREBASE_URL).child("chat");
+
         View view = inflater.inflate(R.layout.chat_view, container, false);
 
         AndroidUtilities.statusBarHeight = getStatusBarHeight();
-
-        chatMessages = new ArrayList<>();
 
         chatListView = (ListView) view.findViewById(R.id.chat_list_view);
 
@@ -89,7 +104,7 @@ public class ChatFragment extends Fragment implements SizeNotifierRelativeLayout
             }
         });
 
-        listAdapter = new ChatListAdapter(chatMessages, getContext());
+        listAdapter = new ChatListAdapter(mFirebaseRef.limit(5), getContext(), mPerson);
 
         chatListView.setAdapter(listAdapter);
 
@@ -105,8 +120,33 @@ public class ChatFragment extends Fragment implements SizeNotifierRelativeLayout
 
         NotificationCenter.getInstance().addObserver(this, NotificationCenter.emojiDidLoaded);
 
+        // Finally, a little indication of connection status
+        mConnectedListener = mFirebaseRef.getRoot().child(".info/connected").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                boolean connected = (Boolean) dataSnapshot.getValue();
+                if (connected) {
+                    Toast.makeText(getContext(), "Connected to Firebase", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Disconnected from Firebase", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                // No-op
+            }
+        });
+
         // Inflate the layout for this fragment
         return view;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mFirebaseRef.getRoot().child(".info/connected").removeEventListener(mConnectedListener);
+        listAdapter.cleanup();
     }
 
 
@@ -122,7 +162,7 @@ public class ChatFragment extends Fragment implements SizeNotifierRelativeLayout
                 EditText editText = (EditText) v;
 
                 if (v == chatEditText1) {
-                    sendMessage(editText.getText().toString(), UserType.OTHER);
+                    sendMessage(editText.getText().toString());
                 }
 
                 chatEditText1.setText("");
@@ -139,7 +179,7 @@ public class ChatFragment extends Fragment implements SizeNotifierRelativeLayout
         public void onClick(View v) {
 
             if (v == enterChatView1) {
-                sendMessage(chatEditText1.getText().toString(), UserType.OTHER);
+                sendMessage(chatEditText1.getText().toString());
             }
 
             chatEditText1.setText("");
@@ -173,37 +213,27 @@ public class ChatFragment extends Fragment implements SizeNotifierRelativeLayout
     };
 
 
-    private void sendMessage(final String messageText, final UserType userType) {
+    private void sendMessage(final String messageText) {
         if (messageText.trim().length() == 0)
             return;
 
         final ChatMessage message = new ChatMessage();
         message.setMessageStatus(Status.SENT);
         message.setMessageText(messageText);
-        message.setUserType(userType);
         message.setMessageTime(new Date().getTime());
-        chatMessages.add(message);
-
-        if (listAdapter != null)
-            listAdapter.notifyDataSetChanged();
+        message.setAuthor(mPerson.getDisplayName());
+        message.setAvatar(mPerson.getAvatar());
+        // Create a new, auto-generated child of that chat location, and save our chat data there
+        mFirebaseRef.push().setValue(message);
 
         // Mark message as delivered after one second
-
         final ScheduledExecutorService exec = Executors.newScheduledThreadPool(1);
 
         exec.schedule(new Runnable() {
             @Override
             public void run() {
                 message.setMessageStatus(Status.DELIVERED);
-
-                final ChatMessage message = new ChatMessage();
-                message.setMessageStatus(Status.SENT);
-                message.setMessageText(messageText);
-                message.setUserType(UserType.SELF);
-                message.setMessageTime(new Date().getTime());
-                chatMessages.add(message);
-
-                //todo changed here
+               // mFirebaseRef.push().setValue(message);
                 getActivity().runOnUiThread(new Runnable() {
                     public void run() {
                         listAdapter.notifyDataSetChanged();

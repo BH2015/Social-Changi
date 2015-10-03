@@ -3,6 +3,8 @@ package examples.android.com.socialatchangi;
 import android.app.Application;
 import android.os.Handler;
 
+import com.firebase.client.Firebase;
+
 /**
  * Created by madhur on 3/1/15.
  */
@@ -20,6 +22,7 @@ public class App extends Application {
         applicationHandler = new Handler(getInstance().getMainLooper());
 
         NativeLoader.initNativeLibs(App.getInstance());
+        Firebase.setAndroidContext(this);
 
     }
 

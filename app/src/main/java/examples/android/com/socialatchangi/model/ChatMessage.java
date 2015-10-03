@@ -6,8 +6,10 @@ package examples.android.com.socialatchangi.model;
 public class ChatMessage {
 
     private String messageText;
-    private UserType userType;
     private Status messageStatus;
+    private String author;
+    private long messageTime;
+    private Avatar avatar;
 
     public long getMessageTime() {
         return messageTime;
@@ -17,14 +19,8 @@ public class ChatMessage {
         this.messageTime = messageTime;
     }
 
-    private long messageTime;
-
     public void setMessageText(String messageText) {
         this.messageText = messageText;
-    }
-
-    public void setUserType(UserType userType) {
-        this.userType = userType;
     }
 
     public void setMessageStatus(Status messageStatus) {
@@ -36,11 +32,23 @@ public class ChatMessage {
         return messageText;
     }
 
-    public UserType getUserType() {
-        return userType;
-    }
-
     public Status getMessageStatus() {
         return messageStatus;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public Avatar getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
     }
 }

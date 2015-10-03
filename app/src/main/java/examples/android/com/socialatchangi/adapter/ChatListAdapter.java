@@ -1,4 +1,4 @@
-package examples.android.com.socialatchangi;
+package examples.android.com.socialatchangi.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,54 +8,40 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import com.firebase.client.Query;
 
+import java.text.SimpleDateFormat;
+
+import examples.android.com.socialatchangi.R;
 import examples.android.com.socialatchangi.model.ChatMessage;
+import examples.android.com.socialatchangi.model.Person;
 import examples.android.com.socialatchangi.model.Status;
-import examples.android.com.socialatchangi.model.UserType;
 import examples.android.com.socialatchangi.widget.Emoji;
 import in.co.madhur.chatbubblesdemo.AndroidUtilities;
 
 /**
  * Created by madhur on 17/01/15.
  */
-public class ChatListAdapter extends BaseAdapter {
+public class ChatListAdapter extends FirebaseListAdapter<ChatMessage> {
 
-    private ArrayList<ChatMessage> chatMessages;
+    // The mUsername for this client. We use this to indicate which messages originated from this user
+    private Person mPerson;
     private Context context;
     public static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("HH:mm");
 
-    public ChatListAdapter(ArrayList<ChatMessage> chatMessages, Context context) {
-        this.chatMessages = chatMessages;
+    public ChatListAdapter(Query ref, Context context, Person mPerson) {
+        super(ref, ChatMessage.class, context);
         this.context = context;
-
-    }
-
-
-    @Override
-    public int getCount() {
-        return chatMessages.size();
+        this.mPerson = mPerson;
     }
 
     @Override
-    public Object getItem(int position) {
-        return chatMessages.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View populateView(View convertView, ChatMessage message) {
         View v = null;
-        ChatMessage message = chatMessages.get(position);
         ViewHolder1 holder1;
         ViewHolder2 holder2;
 
-        if (message.getUserType() == UserType.SELF) {
+        if (!message.getAuthor().equals(mPerson.getDisplayName())) {
             if (convertView == null) {
                 v = LayoutInflater.from(context).inflate(R.layout.chat_user1_item, null, false);
                 holder1 = new ViewHolder1();
@@ -63,6 +49,7 @@ public class ChatListAdapter extends BaseAdapter {
 
                 holder1.messageTextView = (TextView) v.findViewById(R.id.message_text);
                 holder1.timeTextView = (TextView) v.findViewById(R.id.time_text);
+                holder1.replyAuthor = (TextView) v.findViewById(R.id.chat_company_reply_author);
 
                 v.setTag(holder1);
             } else {
@@ -73,8 +60,9 @@ public class ChatListAdapter extends BaseAdapter {
 
             holder1.messageTextView.setText(Emoji.replaceEmoji(message.getMessageText(), holder1.messageTextView.getPaint().getFontMetricsInt(), AndroidUtilities.dp(16)));
             holder1.timeTextView.setText(SIMPLE_DATE_FORMAT.format(message.getMessageTime()));
+            holder1.replyAuthor.setText(message.getAuthor());
 
-        } else if (message.getUserType() == UserType.OTHER) {
+        } else {
 
             if (convertView == null) {
                 v = LayoutInflater.from(context).inflate(R.layout.chat_user2_item, null, false);
@@ -118,13 +106,14 @@ public class ChatListAdapter extends BaseAdapter {
 
     @Override
     public int getItemViewType(int position) {
-        ChatMessage message = chatMessages.get(position);
-        return message.getUserType().ordinal();
+        ChatMessage message = (ChatMessage) getItem(position);
+        return message.getAuthor().equals(mPerson.getDisplayName()) ? 0 : 1;
     }
 
     private class ViewHolder1 {
         public TextView messageTextView;
         public TextView timeTextView;
+        public TextView replyAuthor;
 
 
     }
