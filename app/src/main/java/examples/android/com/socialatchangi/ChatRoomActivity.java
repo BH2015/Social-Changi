@@ -1,7 +1,6 @@
 package examples.android.com.socialatchangi;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -15,6 +14,8 @@ public class ChatRoomActivity extends ActionBarActivity {
     private Button categoryGardens;
     private Button categoryShops;
     private Button categoryActive;
+    private ChatFragment chatFragmentActive;
+    private ChatViewBroadCastReceiverFragment broadcastFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class ChatRoomActivity extends ActionBarActivity {
 
         this.categoryActive = this.categoryMovies;
         this.categoryActive.setSelected(true);
+        startCategory("movies");
     }
 
     public void onSwitchCategory(View view) {
@@ -45,13 +47,40 @@ public class ChatRoomActivity extends ActionBarActivity {
         int id = view.getId();
         switch (id) {
             case R.id.category_movies:
+                startCategory("movies");
                 break;
             case R.id.category_games:
+                startCategory("games");
                 break;
             case R.id.category_gardens:
+                startCategory("gardens");
                 break;
             case R.id.category_shops:
+                startCategory("shops");
                 break;
+        }
+    }
+
+    private void startCategory(String category) {
+        if (findViewById(R.id.fragment_container) != null) {
+            if (this.chatFragmentActive != null) {
+                getSupportFragmentManager().beginTransaction().remove(this.chatFragmentActive).commit();
+            }
+
+            Bundle b = new Bundle();
+            b.putString("category", category);
+
+            ChatFragment chatFragment = new ChatFragment();
+            chatFragment.setArguments(b);
+            this.chatFragmentActive = chatFragment;
+
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, this.chatFragmentActive).commit();
+
+            ChatViewBroadCastReceiverFragment broadcastFragment = new ChatViewBroadCastReceiverFragment();
+            broadcastFragment.setArguments(b);
+            this.broadcastFragment = broadcastFragment;
+
+            getSupportFragmentManager().beginTransaction().add(R.id.broadcast_fragment_container, this.broadcastFragment).commit();
         }
     }
 
