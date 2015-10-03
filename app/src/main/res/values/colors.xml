@@ -4,7 +4,8 @@
 
     <color name="touch_effect">#9ccc</color>
 
-    <color name="topeka_primary">#00bad2</color>
+    <!--<color name="topeka_primary">#00bad2</color>-->
+    <color name="topeka_primary">#e91e63</color>
     <color name="topeka_primary_dark">#00a3b8</color>
     <color name="topeka_blank">#424242</color>
     <color name="topeka_accent">#3F51B5</color>
@@ -25,7 +26,8 @@
     <color name="theme_green_text">@color/text_dark</color>
     <color name="theme_green_primary_dark">#19cc9f</color>
 
-    <color name="theme_purple_background">#b388ff</color>
+    <!--<color name="theme_purple_background">#b388ff</color>-->
+    <color name="theme_purple_background">#6a1b9a</color>
     <color name="theme_purple_primary">#7e57c2</color>
     <color name="theme_purple_accent">#ff9419</color>
     <color name="theme_purple_text">@color/text_light</color>
