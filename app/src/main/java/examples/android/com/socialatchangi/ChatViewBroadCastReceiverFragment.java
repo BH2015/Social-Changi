@@ -114,7 +114,7 @@ public class ChatViewBroadCastReceiverFragment extends Fragment {
 
     public GameCategory getRandomGameMessage() {
         GameCategory game = new GameCategory();
-        game.setGame_id(String.valueOf((int) Math.round(Math.random() * 11)));
+        game.setGame_id(String.valueOf((int) Math.round(Math.random() * 12)));
         game.setGame_name("GOD OF WAR" + game.getGame_id());
         game.setArena("MULTIUSER");
         game.setLocation("T2, GamingZone, L2");

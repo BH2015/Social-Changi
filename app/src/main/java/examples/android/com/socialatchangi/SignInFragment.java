@@ -1,21 +1,23 @@
 package examples.android.com.socialatchangi;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.annotation.Nullable;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import examples.android.com.socialatchangi.adapter.AvatarAdapter;
 import examples.android.com.socialatchangi.helper.PreferenceHelper;
@@ -32,7 +34,7 @@ import examples.android.com.socialatchangi.widget.DoneFab;
  * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
  * interface.
  */
-public class SignInFragment extends Fragment {
+public class SignInFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
 
     private static final String EXTRA_PERSON = "person";
@@ -47,6 +49,10 @@ public class SignInFragment extends Fragment {
     private Avatar mSelectedAvatar = Avatar.ONE;
     private boolean edit;
     private TextWatcher textWatcher;
+    private Spinner spinner;
+
+    private static final String EXTRA_CATEGORY = "catgeory";
+    private String categorySelected = "games";
 
     public static SignInFragment newInstance() {
         SignInFragment fragment = new SignInFragment();
@@ -107,6 +113,12 @@ public class SignInFragment extends Fragment {
             mDoneFab.setVisibility(View.VISIBLE);
         }
 
+        spinner = (Spinner) view.findViewById(R.id.spinner_category);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),
+                R.array.categories_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -221,6 +233,7 @@ public class SignInFragment extends Fragment {
 //                .makeSceneTransitionAnimation(activity, pairs);
         Intent starter = new Intent(activity, ChatRoomActivity.class);
         starter.putExtra(EXTRA_PERSON, mPerson);
+        starter.putExtra(EXTRA_CATEGORY,categorySelected);
 //        activity.startActivity(starter, activityOptions.toBundle());
         activity.startActivity(starter);
         //CategorySelectionActivity.start(activity, mPerson, activityOptions);
@@ -240,6 +253,17 @@ public class SignInFragment extends Fragment {
         if (null == mPerson) {
             mPerson = PreferenceHelper.getPerson(getActivity());
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            categorySelected = (String) adapterView.getItemAtPosition(i);
+        Log.d("SPINNER ",categorySelected);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+        categorySelected = "games";
     }
 
     /**

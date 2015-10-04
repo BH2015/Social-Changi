@@ -26,7 +26,7 @@
         android:id="@+id/toolbar_sign_in"
         style="@style/SAC.TextAppearance.Title"
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
+        android:layout_height="25dp"
         android:elevation="@dimen/elevation_header"
         android:gravity="center_vertical"
         android:text="@string/sign_in" />
@@ -42,4 +42,27 @@
         android:paddingBottom="@dimen/spacing_micro"
         android:paddingTop="@dimen/spacing_micro"
         android:textSize="@dimen/size_edit_text" />
+
+    <TextView
+        android:id="@+id/toolbar_select_category"
+        style="@style/SAC.TextAppearance.Title"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:elevation="@dimen/elevation_header"
+        android:gravity="center_vertical"
+        android:text="@string/choose_category" />
+
+    <Spinner
+        android:id="@+id/spinner_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textCapWords"
+        android:minHeight="?android:attr/actionBarSize"
+        android:textSize="@dimen/size_edit_text"
+        android:spinnerMode="dropdown"
+        android:splitMotionEvents="true"
+        android:paddingBottom="@dimen/spacing_micro"
+        android:paddingTop="@dimen/spacing_micro"
+        style="@style/spinnerDropDownItemStyle"/>
+
 </LinearLayout>

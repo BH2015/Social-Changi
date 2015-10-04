@@ -1,8 +1,10 @@
 package examples.android.com.socialatchangi;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -24,6 +26,8 @@ public class ChatRoomActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        String categorySelected = intent.getStringExtra("catgeory");
         setContentView(R.layout.activity_chat_room);
 
         this.categoriesBar = (Toolbar) this.findViewById(R.id.categories_bar);
@@ -37,10 +41,23 @@ public class ChatRoomActivity extends ActionBarActivity {
         this.categoryGames = (Button) this.categoriesBar.findViewById(R.id.category_games);
         this.categoryGardens = (Button) this.categoriesBar.findViewById(R.id.category_gardens);
         this.categoryShops = (Button) this.categoriesBar.findViewById(R.id.category_shops);
+        if (categorySelected != null) {
+            if ("Games".equalsIgnoreCase(categorySelected)) {
+                this.categoryActive = this.categoryGames;
+            } else if ("Movies".equalsIgnoreCase(categorySelected)) {
+                this.categoryActive = this.categoryMovies;
+            } else if ("Garden".equalsIgnoreCase(categorySelected)) {
+                this.categoryActive = this.categoryGardens;
+            } else if ("Shops".equalsIgnoreCase(categorySelected)) {
+                this.categoryActive = this.categoryShops;
+            }
+        }
 
-        this.categoryActive = this.categoryGames;
         this.categoryActive.setSelected(true);
-        startCategory("games");
+
+        Log.d("CATEGORY SELECTED ",categorySelected);
+
+        startCategory(categorySelected);
 
         Bundle b = new Bundle();
         b.putString("category", "broadcast");
