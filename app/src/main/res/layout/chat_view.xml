@@ -10,7 +10,8 @@
         android:id="@+id/broadcast_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="@dimen/chat_view_broadcast_receiver_height"
-        tools:layout="@layout/chat_view" />
+        tools:layout="@layout/chat_view"
+        />
 
     <ListView
         android:id="@+id/chat_list_view"
@@ -20,7 +21,7 @@
         android:layout_width="match_parent"
         android:scrollbarStyle="outsideOverlay"
         android:layout_above="@+id/bottomlayout"
-        android:layout_below="@+id/chat_view_broacast_fragment"
+        android:layout_below="@+id/broadcast_fragment_container"
         android:layout_height="match_parent"
         android:transcriptMode="alwaysScroll"
         android:stackFromBottom="true" />
