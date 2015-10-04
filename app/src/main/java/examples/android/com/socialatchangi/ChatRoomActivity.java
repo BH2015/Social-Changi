@@ -57,7 +57,7 @@ public class ChatRoomActivity extends ActionBarActivity {
 
         Log.d("CATEGORY SELECTED ",categorySelected);
 
-        startCategory(categorySelected);
+        startCategory(categorySelected.toLowerCase());
 
         Bundle b = new Bundle();
         b.putString("category", "broadcast");
