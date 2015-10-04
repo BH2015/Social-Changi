@@ -61,7 +61,7 @@ public class ChatViewBroadCastReceiverFragment extends Fragment {
         //Animator
         ValueAnimator skyAnimator = ObjectAnimator.ofInt(mImg, "backgroundColor",
                 Color.rgb(238,0,238), Color.rgb(205,41,144));
-        skyAnimator.setDuration(3000);
+        skyAnimator.setDuration(300);
         skyAnimator.setRepeatCount(ValueAnimator.INFINITE);
         skyAnimator.setRepeatMode(ValueAnimator.REVERSE);
         skyAnimator.setEvaluator(new ArgbEvaluator());
