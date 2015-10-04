@@ -9,20 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button android:id="@+id/category_movies"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:drawableTop="@drawable/button_movies_selector"
-            android:paddingTop="2pt"
-            android:text="@string/category_label_movies"
-            android:textAllCaps="false"
-            android:textColor="@drawable/button_text_selector"
-            android:textSize="12sp"
-            android:onClick="onSwitchCategory" />
-
         <Button android:id="@+id/category_games"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="48dp"
@@ -32,6 +18,20 @@
             android:drawableTop="@drawable/button_games_selector"
             android:paddingTop="2pt"
             android:text="@string/category_label_games"
+            android:textAllCaps="false"
+            android:textColor="@drawable/button_text_selector"
+            android:textSize="12sp"
+            android:onClick="onSwitchCategory" />
+
+        <Button android:id="@+id/category_movies"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/button_movies_selector"
+            android:paddingTop="2pt"
+            android:text="@string/category_label_movies"
             android:textAllCaps="false"
             android:textColor="@drawable/button_text_selector"
             android:textSize="12sp"
