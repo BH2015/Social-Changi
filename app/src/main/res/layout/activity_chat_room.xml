@@ -6,8 +6,16 @@
     android:orientation="vertical"
     tools:context="examples.android.com.socialatchangi.ChatRoomActivity">
 
+    <FrameLayout
+        android:id="@+id/broadcast_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/chat_view_broadcast_receiver_height"
+        tools:layout="@layout/chat_view"
+        android:layout_above="@+id/fragment_container"
+        />
+
     <FrameLayout android:name="examples.android.com.socialatchangi.ChatFragment"
-        android:id="@+id/fragment_container"
+        android:id="@id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"

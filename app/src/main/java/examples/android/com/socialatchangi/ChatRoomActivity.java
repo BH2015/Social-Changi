@@ -6,6 +6,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ChatRoomActivity extends ActionBarActivity {
 
     private Toolbar categoriesBar;
@@ -15,6 +18,7 @@ public class ChatRoomActivity extends ActionBarActivity {
     private Button categoryShops;
     private Button categoryActive;
     private ChatFragment chatFragmentActive;
+    private Map<String, ChatFragment> chatFragmentMap = new HashMap<>();
     private ChatViewBroadCastReceiverFragment broadcastFragment;
 
     @Override
@@ -37,6 +41,14 @@ public class ChatRoomActivity extends ActionBarActivity {
         this.categoryActive = this.categoryGames;
         this.categoryActive.setSelected(true);
         startCategory("games");
+
+        Bundle b = new Bundle();
+        b.putString("category", "broadcast");
+        if (this.broadcastFragment == null) {
+            this.broadcastFragment = new ChatViewBroadCastReceiverFragment();
+            this.broadcastFragment.setArguments(b);
+            getSupportFragmentManager().beginTransaction().add(R.id.broadcast_fragment_container, this.broadcastFragment).commit();
+        }
     }
 
     public void onSwitchCategory(View view) {
@@ -63,24 +75,29 @@ public class ChatRoomActivity extends ActionBarActivity {
 
     private void startCategory(String category) {
         if (findViewById(R.id.fragment_container) != null) {
+
+
             if (this.chatFragmentActive != null) {
                 getSupportFragmentManager().beginTransaction().remove(this.chatFragmentActive).commit();
             }
 
-            Bundle b = new Bundle();
-            b.putString("category", category);
-
-            ChatFragment chatFragment = new ChatFragment();
-            chatFragment.setArguments(b);
-            this.chatFragmentActive = chatFragment;
+            this.chatFragmentActive = getChatFragment(category);
 
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, this.chatFragmentActive).commit();
 
-            ChatViewBroadCastReceiverFragment broadcastFragment = new ChatViewBroadCastReceiverFragment();
-            broadcastFragment.setArguments(b);
-            this.broadcastFragment = broadcastFragment;
+        }
+    }
 
-            getSupportFragmentManager().beginTransaction().add(R.id.broadcast_fragment_container, this.broadcastFragment).commit();
+    private ChatFragment getChatFragment(String category) {
+        Bundle b = new Bundle();
+        b.putString("category", category);
+
+        if (this.chatFragmentMap.containsKey(category)) {
+            return chatFragmentMap.get(category);
+        } else {
+            ChatFragment frag = new ChatFragment();
+            frag.setArguments(b);
+            return frag;
         }
     }
 

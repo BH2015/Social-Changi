@@ -128,9 +128,7 @@ public class ChatFragment extends Fragment implements SizeNotifierRelativeLayout
             public void onDataChange(DataSnapshot dataSnapshot) {
                 boolean connected = (Boolean) dataSnapshot.getValue();
                 if (connected) {
-                    Toast.makeText(getContext(), "Connected to Firebase", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getContext(), "Disconnected from Firebase", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Now joining chat room for " + toTitleCase(category), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -142,6 +140,24 @@ public class ChatFragment extends Fragment implements SizeNotifierRelativeLayout
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    private String toTitleCase(String input) {
+        StringBuilder titleCase = new StringBuilder();
+        boolean nextTitleCase = true;
+
+        for (char c : input.toCharArray()) {
+            if (Character.isSpaceChar(c)) {
+                nextTitleCase = true;
+            } else if (nextTitleCase) {
+                c = Character.toTitleCase(c);
+                nextTitleCase = false;
+            }
+
+            titleCase.append(c);
+        }
+
+        return titleCase.toString();
     }
 
     @Override
