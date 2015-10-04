@@ -88,20 +88,19 @@ public class ChatViewBroadCastReceiverFragment extends Fragment {
                         String loc = categoryMap.get(FirebaseUtil.FirebaseDataTree
                                 .GAMES_CATEGORY.getSubCategory()).get("location");
                         int resId = R.drawable.gamers_sticker1;
+                        mGameName.setText(game_name);
+                        mArena.setText(arena);
+                        mStartTimr.setText(meetupTime);
+                        mLoc.setText(loc);
                         try {
                           resId = ChatViewBroadCastReceiverFragment.this.getResources()
                                   .getIdentifier(gameStickerId, "drawable",
                                           ChatViewBroadCastReceiverFragment.this.getActivity()
                                                   .getApplicationContext().getPackageName());
+                            mImg.setImageResource(resId);
                         } catch (Exception e) {
                             resId = R.drawable.gamers_sticker10;
                         }
-
-                        mGameName.setText(game_name);
-                        mArena.setText(arena);
-                        mStartTimr.setText(meetupTime);
-                        mLoc.setText(loc);
-                        mImg.setImageResource(resId);
                     }
 
                     @Override

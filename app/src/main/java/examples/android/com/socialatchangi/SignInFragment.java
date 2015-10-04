@@ -46,6 +46,7 @@ public class SignInFragment extends Fragment {
     private EditText mFirstName;
     private Avatar mSelectedAvatar = Avatar.ONE;
     private boolean edit;
+    private TextWatcher textWatcher;
 
     public static SignInFragment newInstance() {
         SignInFragment fragment = new SignInFragment();
@@ -142,10 +143,19 @@ public class SignInFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        mFirstName.removeTextChangedListener(textWatcher);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mFirstName.setText("");
+        mFirstName.addTextChangedListener(textWatcher);
+        mDoneFab.setVisibility(View.GONE);
     }
 
     private void initContentViews(View view) {
-        TextWatcher textWatcher = new TextWatcher() {
+        textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 /* no-op */

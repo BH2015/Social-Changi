@@ -34,9 +34,9 @@ public class ChatRoomActivity extends ActionBarActivity {
         this.categoryGardens = (Button) this.categoriesBar.findViewById(R.id.category_gardens);
         this.categoryShops = (Button) this.categoriesBar.findViewById(R.id.category_shops);
 
-        this.categoryActive = this.categoryMovies;
+        this.categoryActive = this.categoryGames;
         this.categoryActive.setSelected(true);
-        startCategory("movies");
+        startCategory("games");
     }
 
     public void onSwitchCategory(View view) {
