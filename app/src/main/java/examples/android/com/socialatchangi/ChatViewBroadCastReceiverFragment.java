@@ -1,6 +1,10 @@
 package examples.android.com.socialatchangi;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -53,6 +57,17 @@ public class ChatViewBroadCastReceiverFragment extends Fragment {
         mLoc = (TextView)view.findViewById(R.id.arena_location);
 
         mImg = (ImageView)view.findViewById(R.id.sticker_id);
+
+        //Animator
+        ValueAnimator skyAnimator = ObjectAnimator.ofInt(mImg, "backgroundColor",
+                Color.rgb(255, 218, 185), Color.rgb(142,35,35));
+        skyAnimator.setDuration(3000);
+        skyAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        skyAnimator.setRepeatMode(ValueAnimator.REVERSE);
+        skyAnimator.setEvaluator(new ArgbEvaluator());
+        skyAnimator.start();
+
+        //Firebase
         FirebaseUtil.addValueEventListener(FirebaseUtil.FirebaseDataTree.GAMES_CATEGORY,
                 new ValueEventListener() {
                     @Override
